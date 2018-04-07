@@ -1,21 +1,25 @@
 import {
+    // 名前が被ってしまうので別名でimportする
     createStore as reduxCreateStore,
     combineReducers,
-    applyMiddleware,
+    applyMiddleware
 } from 'redux';
-import { routerReducer, routerMiddleware} from 'react-router-redux'
+import { routerReducer, routerMiddleware } from 'react-router-redux';
+import logger from 'redux-logger';
 import tasksReducer from '../reducers/tasks';
 
-// historyは[src/index.js]かた渡す
+// historyはsrc/index.jsから渡すようにする
 export default function createStore(history) {
     return reduxCreateStore(
         combineReducers({
             tasks: tasksReducer,
+            // react-router-reduxのReducer
             router: routerReducer,
         }),
         applyMiddleware(
-         routerMiddleware(history)
+            logger,
+            // react-router-reduxのRedux Middleware
+            routerMiddleware(history)
         )
     );
-
 }

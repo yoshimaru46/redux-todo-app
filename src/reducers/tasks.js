@@ -3,14 +3,13 @@ const initialState = {
     tasks: []
 };
 
-function tasksReducer(state = initialState, action) {
+export default function tasksReducer(state = initialState, action) {
     switch (action.type) {
         case 'INPUT_TASK':
             return {
                 ...state,
                 task: action.payload.task
             };
-
         case 'ADD_TASK':
             return {
                 ...state,
@@ -20,5 +19,3 @@ function tasksReducer(state = initialState, action) {
             return state;
     }
 }
-
-export default tasksReducer;

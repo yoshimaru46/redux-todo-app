@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default function TodoApp({ task, tasks, inputTask, addTask, redirectToError })
-{
+export default function TodoApp({ task, tasks, inputTask, addTask, redirectToError }) {
     return (
         <div>
             <input type="text" onChange={(e) => inputTask(e.target.value)} />
@@ -15,7 +14,7 @@ export default function TodoApp({ task, tasks, inputTask, addTask, redirectToErr
                     })
                 }
             </ul>
-            <button onClick={() => redirectToError()}>Go to Error page</button>
+            <button onClick={() => redirectToError()} >エラーページへ</button>
         </div>
     );
 }

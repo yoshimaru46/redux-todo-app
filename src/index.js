@@ -1,27 +1,26 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import ConnectedRouter from 'react-router-redux';
+import { ConnectedRouter } from 'react-router-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
-import TodoApp from './components/TodoApp';
+import TodoApp from './containers/TodoApp';
 import Error from './components/Error';
 import createStore from './store';
-import { creteStore, applyMiddleware } from 'redux';
-import logger from 'redux-logger';
 
+// historyのインスタンスを生成
 const history = createBrowserHistory();
-const store = createStore(
-    reducer,
-    applyMiddleware(logger)
-);
 
-ReactDOM.render(
+// Storeの生成
+const store = createStore(history);
+
+render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <div>
+                {/* ルーティングさせる */}
                 <Route exact path="/" component={TodoApp} />
-                <Route exact path="/" component={Error} />
+                <Route path="/error" component={Error} />
             </div>
         </ConnectedRouter>
     </Provider>,
