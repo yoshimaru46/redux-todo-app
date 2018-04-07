@@ -1,15 +1,29 @@
 import React from 'react';
-import { Provider} from 'react-redux';
-import { createStore } from 'redux';
-import { render } from 'react-dom';
-import tasksReducer from './reducers/tasks';
+import ReactDOM from 'react-dom';
+import { Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import ConnectedRouter from 'react-router-redux';
+import createBrowserHistory from 'history/createBrowserHistory';
 import TodoApp from './components/TodoApp';
+import Error from './components/Error';
+import createStore from './store';
+import { creteStore, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
 
-const store = createStore(tasksReducer);
+const history = createBrowserHistory();
+const store = createStore(
+    reducer,
+    applyMiddleware(logger)
+);
 
-render(
+ReactDOM.render(
     <Provider store={store}>
-        <TodoApp />
+        <ConnectedRouter history={history}>
+            <div>
+                <Route exact path="/" component={TodoApp} />
+                <Route exact path="/" component={Error} />
+            </div>
+        </ConnectedRouter>
     </Provider>,
     document.getElementById('root')
 );

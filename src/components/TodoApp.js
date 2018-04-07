@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function TodoApp({ task, tasks, inputTask, addTask })
+export default function TodoApp({ task, tasks, inputTask, addTask, redirectToError })
 {
     return (
         <div>
@@ -15,6 +15,7 @@ export default function TodoApp({ task, tasks, inputTask, addTask })
                     })
                 }
             </ul>
+            <button onClick={() => redirectToError()}>Go to Error page</button>
         </div>
     );
 }
